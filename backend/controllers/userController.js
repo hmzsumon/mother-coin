@@ -123,6 +123,12 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
 		return next(new ErrorHander('Phone number already exists', 400));
 	}
 
+	// check if userid already exists
+	const ex_userId = await User.findOne({ user_id: userId });
+	if (ex_userId) {
+		return next(new ErrorHander('User id already exists', 400));
+	}
+
 	// 6 digit verification code
 	const verify_code = Math.floor(100000 + Math.random() * 900000);
 

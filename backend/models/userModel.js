@@ -29,7 +29,6 @@ const userSchema = new mongoose.Schema(
 		},
 		user_id: {
 			type: String,
-			unique: true,
 			trim: true,
 			minLength: [6, 'User Id should have 6 characters'],
 		},
