@@ -39,7 +39,7 @@ const Login = () => {
 		? location.search.split('=')[1]
 		: s_user?.role === 'admin' || s_user?.role === 'manager'
 		? 'admin-dashboard'
-		: 'user-dashboard';
+		: 'dashboard';
 
 	useEffect(() => {
 		if (isAuthenticated) {
