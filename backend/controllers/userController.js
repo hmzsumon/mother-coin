@@ -107,7 +107,6 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
 		return timestamp + random;
 	}
 	const mother_id = generateUniqueId().substring(0, 12);
-	s;
 	// check if mother id already exists
 
 	const random_num2 = uuidv4().toString().replace(/-/g, '').substring(0, 32);
