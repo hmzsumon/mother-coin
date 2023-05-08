@@ -128,7 +128,7 @@ const FreeMing = () => {
 		<div className='p-4 space-y-4 rounded-md bg-stone-800'>
 			<div className='text-center '>
 				<span className='text-xs font-bold text-gray-100'>
-					TRXC Mining (Free)
+					Mother Mining (Free)
 				</span>
 				<div className=''>
 					{miningLoading ? (

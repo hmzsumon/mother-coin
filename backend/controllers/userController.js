@@ -204,8 +204,6 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
 		return next(new ErrorHander('Invalid phone number or password', 401));
 	}
 
-	console.log('user', user);
-
 	const isPasswordMatched = await user.comparePassword(password);
 
 	if (!isPasswordMatched) {
