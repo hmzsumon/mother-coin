@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+	scroll-behavior: smooth;
+	z-index: -1 !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: #fff !important;
+}
+
+.mobile-menu {
+	transform: translateX(-100%);
+}
+
+.active-mobile-menu {
+	transform: translateX(0);
+}
+.z-index-menu {
+	z-index: 9999;
+}
+.mobile_menu {
+	background: #fff;
+	z-index: 99999;
+	width: 70%;
+}
+.mobile_menu ul li {
+	border: none;
+	border-top: 1px solid #444;
+	border-bottom: 1px solid #111;
+	cursor: pointer;
+}
+.mobile_menu ul li:hover {
+	background-color: #222;
+	transition: all 0.5s ease;
+}
+
+.mobile_menu ul li:last-child {
+	border-bottom: 1px solid #444;
+}
+.mobile_menu ul li a {
+	color: #999;
+}
+.expand {
+	transform: translateX(0);
+	transition: all 0.5s ease-in-out;
+}
+/*End Mobile menu */
