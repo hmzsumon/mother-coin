@@ -11,14 +11,21 @@ import { Link } from 'react-router-dom';
 
 const menuItems = [
 	{ id: 1, name: 'Referral', icon: <AiOutlineShareAlt />, link: '/referral' },
+	{
+		id: 9,
+		name: 'Buy Coin',
+		icon: <AiOutlineShareAlt />,
+		link: '/coming-soon',
+	},
 	{ id: 3, name: 'Loan', icon: <FaHandHoldingUsd />, link: '/coming-soon' },
-	{ id: 2, name: 'Top-up', icon: <BiArrowToTop />, link: '/coming-soon' },
+
 	{
 		id: 4,
 		name: 'History',
 		icon: <GrTransaction />,
 		link: '/transactions',
 	},
+	{ id: 2, name: 'Top-up', icon: <BiArrowToTop />, link: '/coming-soon' },
 	{ id: 5, name: 'Support', icon: <FcOnlineSupport />, link: '/support' },
 	{
 		id: 6,
@@ -28,11 +35,29 @@ const menuItems = [
 	},
 	{
 		id: 7,
-		name: 'Card',
+		name: 'Virtual Card',
 		icon: <BsFillCreditCard2BackFill />,
 		link: '/coming-soon',
 	},
 	{ id: 8, name: 'Airdrop', icon: <GiProfit />, link: '/coming-soon' },
+	{
+		id: 11,
+		name: 'Mining',
+		icon: <GiProfit />,
+		link: '/coming-soon',
+	},
+	{
+		id: 12,
+		name: 'Launch',
+		icon: <GiProfit />,
+		link: '/coming-soon',
+	},
+	{
+		id: 13,
+		name: 'Chart',
+		icon: <GiProfit />,
+		link: '/coming-soon',
+	},
 ];
 
 const Menu = () => {

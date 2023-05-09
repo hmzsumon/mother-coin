@@ -6,6 +6,7 @@ import Carousel from './Carousel';
 import { useLoadUserQuery } from '../../../features/auth/authApi';
 import DefaultLoader from '../../../global/DefaultLoader';
 import PriceList2 from './PriceList2';
+import UserInfo from './UserInfo';
 
 const UserDashboard = () => {
 	const { data, error, isError, isLoading } = useLoadUserQuery();
@@ -25,6 +26,7 @@ const UserDashboard = () => {
 				<DefaultLoader />
 			) : (
 				<div className='space-y-3 '>
+					<UserInfo user={user} />
 					<Menu />
 					<Carousel />
 					<PriceList2

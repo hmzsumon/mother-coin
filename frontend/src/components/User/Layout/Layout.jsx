@@ -9,6 +9,9 @@ import { useLogoutMutation } from '../../../features/auth/authApi';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useRef } from 'react';
+import Navbar from './Navbar';
+import { BiLinkExternal } from 'react-icons/bi';
+import Top from './Top';
 
 const Layout = ({ children }) => {
 	const navigate = useNavigate();
@@ -39,7 +42,7 @@ const Layout = ({ children }) => {
 		setOpen(!open);
 	};
 	return (
-		<div className='relative flex flex-col min-h-screen bg-stone-950 md:bg-stone-900 '>
+		<div className='relative flex flex-col min-h-screen pb-12 bg-stone-950 md:bg-stone-900 '>
 			<Header handleOpen={handleOpen} />
 			{/* Start Mobile Menu */}
 			<div
@@ -49,15 +52,7 @@ const Layout = ({ children }) => {
 			>
 				<div>
 					<div className='px-2 my-3'>
-						<div className='space-x-[2px] flex items-center'>
-							<div>
-								<AiOutlineUser className='text-3xl text-gray-100' />
-							</div>
-							<div className=' text-[.6rem]'>
-								<p className=''>MID: {user?.mother_id}</p>
-								<p className=''>{user?.name}</p>
-							</div>
-						</div>
+						<Top user={user} />
 						<div className=' ml-7  space-x-2 text-[0.5rem]'>
 							{user?.is_kyc ? (
 								<button className='px-2 py-1 text-green-500 rounded-sm bg-stone-800'>
@@ -65,7 +60,7 @@ const Layout = ({ children }) => {
 								</button>
 							) : (
 								<button className='px-2 py-1 text-red-500 rounded-sm bg-stone-800'>
-									Not Verify
+									Not Verify (KYC)
 								</button>
 							)}
 						</div>
@@ -101,6 +96,7 @@ const Layout = ({ children }) => {
 				<div className='w-full col-span-5 px-3 py-4 rounded-sm md:col-span-4 bg-stone-950'>
 					{children}
 				</div>
+				<Navbar />
 			</div>
 		</div>
 	);
