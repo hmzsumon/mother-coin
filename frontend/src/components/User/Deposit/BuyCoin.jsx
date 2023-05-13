@@ -50,7 +50,7 @@ const BuyCoin = () => {
 					<div className='text-sm font-bold text-center md:text-2xl'>
 						<h2>Buy Mother Coin</h2>
 						<p className='text-[0.6rem] italic'>
-							Minimum: <span className='text-yellow-400'>$15</span>
+							Minimum: <span className='text-yellow-400'>$10</span>
 						</p>
 					</div>
 					{/* Next False */}

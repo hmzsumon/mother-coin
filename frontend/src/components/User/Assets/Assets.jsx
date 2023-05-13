@@ -17,7 +17,6 @@ const Assets = () => {
 				</div>
 			) : (
 				<div className='h-full pb-20'>
-					<h1 className='my-4 text-xl font-semibold text-gray-100'>Assets</h1>
 					<div className='space-y-4 '>
 						<WalletCard01 user={user} />
 						<WalletCard02 />

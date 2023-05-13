@@ -7,6 +7,10 @@ import { useLoadUserQuery } from '../../../features/auth/authApi';
 import DefaultLoader from '../../../global/DefaultLoader';
 import PriceList2 from './PriceList2';
 import UserInfo from './UserInfo';
+import WalletCard01 from '../Assets/WalletCard01';
+import WalletCard02 from '../Assets/WalletCard02';
+import FreeMing from '../Mining/FreeMining';
+import EarnCard from '../Earn/EarnCard';
 
 const UserDashboard = () => {
 	const { data, error, isError, isLoading } = useLoadUserQuery();
@@ -26,10 +30,15 @@ const UserDashboard = () => {
 				<DefaultLoader />
 			) : (
 				<div className='space-y-3 '>
-					<UserInfo user={user} />
-					<Menu />
 					<Carousel />
-					<PriceList2
+					{/* <UserInfo user={user} /> */}
+					<WalletCard01 user={user} />
+					<WalletCard02 user={user} />
+					<EarnCard />
+					<FreeMing />
+					{/* <Menu /> */}
+
+					{/* <PriceList2,,,,,,
 						pair={'MRC/MUSD'}
 						chance={'+24'}
 						isChancePositive={true}
@@ -49,7 +58,7 @@ const UserDashboard = () => {
 						isChancePositive={false}
 						currentPrice={0.1}
 						totalVolume={33970}
-					/>
+					/> */}
 				</div>
 			)}
 		</Layout>

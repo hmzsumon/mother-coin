@@ -42,7 +42,7 @@ const Layout = ({ children }) => {
 		setOpen(!open);
 	};
 	return (
-		<div className='relative flex flex-col min-h-screen pb-12 bg-stone-950 md:bg-stone-900 '>
+		<div className='relative flex flex-col min-h-screen  bg-stone-950 md:bg-stone-900 '>
 			<Header handleOpen={handleOpen} />
 			{/* Start Mobile Menu */}
 			<div
@@ -96,7 +96,7 @@ const Layout = ({ children }) => {
 				<div className='w-full col-span-5 px-3 py-4 rounded-sm md:col-span-4 bg-stone-950'>
 					{children}
 				</div>
-				<Navbar />
+				{/* <Navbar /> */}
 			</div>
 		</div>
 	);

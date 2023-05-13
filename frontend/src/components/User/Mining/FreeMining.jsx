@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import ButtonLoader from '../../../global/ButtonLoader';
 import { FadeLoader, PropagateLoader } from 'react-spinners';
+import MiningGif from '../../../assets/images/mining.gif';
 
 // import {
 // 	useGetUserTrxcMiningQuery,
@@ -96,7 +97,7 @@ const FreeMing = () => {
 			<div className='flex items-center justify-center space-x-2'>
 				<NavLink
 					to='/buy-trxc'
-					className='px-3 py-2 italic font-bold text-center text-gray-100 bg-yellow-600 rounded-sm'
+					className='px-3 py-2 font-bold text-center text-gray-100 bg-yellow-600 rounded-sm'
 				>
 					Buy TRXC
 				</NavLink>
@@ -109,13 +110,13 @@ const FreeMing = () => {
 		content = (
 			<div className='flex items-center justify-center space-x-2'>
 				<button
-					className='px-3 py-2 italic font-bold text-center bg-yellow-500 rounded-sm text-slate-800 hover:bg-yellow-600 disabled:cursor-not-allowed'
+					className='px-3 py-2 font-bold text-center bg-yellow-500 rounded-sm text-slate-900 hover:bg-yellow-600 disabled:cursor-not-allowed'
 					onClick={handleTransfer}
 				>
 					Confirm
 				</button>
 				<button
-					className='px-3 py-2 italic font-bold text-center text-gray-800 bg-orange-500 rounded-sm disabled:cursor-not-allowed'
+					className='px-3 py-2 font-bold text-center text-gray-800 bg-orange-500 rounded-sm disabled:cursor-not-allowed'
 					onClick={handleClose}
 				>
 					Cancel
@@ -125,30 +126,35 @@ const FreeMing = () => {
 	}
 
 	return (
-		<div className='p-4 space-y-4 rounded-md bg-stone-800'>
-			<div className='text-center '>
-				<span className='text-xs font-bold text-gray-100'>
-					Mother Mining (Free)
-				</span>
-				<div className=''>
-					{miningLoading ? (
-						<PropagateLoader color='#fff' />
-					) : (
-						<Countdown profit={trxcMining?.profit} />
-					)}
+		<div className='p-4 space-y-4 rounded-md bg-stone-900'>
+			<div className='flex items-center justify-center gap-4 text-center '>
+				<div>
+					<img src={MiningGif} alt='mining' className='mx-auto w-14 h-14' />
+				</div>
+				<div>
+					<span className='text-xs font-bold text-gray-100'>
+						Mother Coin (Mining)
+					</span>
+					<div className=''>
+						{miningLoading ? (
+							<PropagateLoader color='#fff' />
+						) : (
+							<Countdown profit={trxcMining?.profit} />
+						)}
+					</div>
 				</div>
 			</div>
 			<div className='grid grid-cols-2 gap-4 text-[0.6rem] md:text-sm'>
 				{trxcMining ? (
 					<button
-						className='px-3 py-2 italic font-bold text-center bg-yellow-500 rounded-sm text-slate-800 hover:bg-yellow-600 disabled:cursor-not-allowed'
+						className='px-3 py-2 font-bold text-center text-white bg-yellow-500 rounded-sm hover:bg-yellow-600 disabled:cursor-not-allowed'
 						onClick={handleClickOpen}
 					>
 						Transfer
 					</button>
 				) : (
 					<button
-						className='px-3 py-2 italic font-bold text-center bg-yellow-500 rounded-sm text-slate-800 hover:bg-yellow-600 disabled:cursor-not-allowed'
+						className='px-3 py-2 font-bold text-center text-white bg-yellow-600 rounded-sm hover:bg-yellow-700 disabled:cursor-not-allowed'
 						onClick={handleStartTrxcMining}
 						disabled
 					>
@@ -161,10 +167,10 @@ const FreeMing = () => {
 				)}
 
 				<button
-					className='px-3 py-2 italic font-bold text-center text-black bg-yellow-500 rounded-sm tex disabled:cursor-not-allowed'
+					className='px-3 py-2 font-bold text-center text-white bg-yellow-600 rounded-sm tex disabled:cursor-not-allowed'
 					disabled
 				>
-					Running
+					Claim
 				</button>
 			</div>
 			{/* Dialog Start */}

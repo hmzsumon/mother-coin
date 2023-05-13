@@ -17,9 +17,9 @@ import { AiFillSetting } from 'react-icons/ai';
 const menuItems = [
 	{
 		id: 1,
-		title: 'Public Account',
+		title: 'Dashboard',
 		icon: <MdOutlineDashboardCustomize />,
-		path: '/coming-soon',
+		path: '/dashboard',
 		subItems: [],
 		isSubMenu: false,
 	},

@@ -5,7 +5,7 @@ export const methods = [
 		address: 'TLVvNyUUQ5ZGf8ck5R5TBcZd91ftuwBBsg',
 		img: 'https://i.ibb.co/xCmrr4n/usdt.png',
 		qr: 'https://i.ibb.co/2dtx3df/qrcode1.png',
-		title: 'USDT Tron ( TRC-20)',
+		title: 'USDT ( TRC-20)',
 		isActive: true,
 	},
 	{
@@ -23,7 +23,7 @@ export const methods = [
 		address: '0xb65d56BF5820ee6df2cA50d00cfdDF3E80F4Aa26',
 		img: 'https://i.ibb.co/h7C4brr/bnb.png',
 		qr: 'https://i.ibb.co/2dtx3df/qrcode1.png',
-		title: 'BNB',
+		title: 'BNB (BSC-20)',
 		isActive: false,
 	},
 	{
@@ -33,7 +33,7 @@ export const methods = [
 		address: 'bc1qpyx6mmld23qzgla5cedyhpsyh42wkkptrzq33v',
 		img: 'https://i.ibb.co/Jd72Czt/ethereum.png',
 		qr: 'https://i.ibb.co/2dtx3df/qrcode1.png',
-		title: 'Ethereum',
+		title: 'Ethereum (ERC-20))',
 		isActive: false,
 	},
 	// {
