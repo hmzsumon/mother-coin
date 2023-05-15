@@ -28,7 +28,7 @@ const menuItems = [
 		id: 5,
 		title: 'My Referral',
 		icon: <VscReferences />,
-		path: '/coming-soon',
+		path: '/referral',
 		subItems: [],
 		isSubMenu: false,
 	},

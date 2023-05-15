@@ -3,10 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 // import { useGetUsdxDetailsQuery } from '../../features/usdx/usdxApi';
 
-const EarnCard = () => {
-	// const { data } = useGetUsdxDetailsQuery();
-	// const { usdx } = data || {};
-	const usdx = {};
+const EarnCard = ({ user }) => {
 	return (
 		<div className='p-4 space-y-4 bg-stone-900 teal-600rounded-md'>
 			<div className='flex items-center '>
@@ -15,9 +12,10 @@ const EarnCard = () => {
 
 			<div className='flex items-center space-x-3'>
 				<h1 className='text-xs text-white '>
-					{usdx?.usdx_balance
-						? Number(usdx?.usdx_balance).toFixed(2)
-						: Number(0).toFixed(8)}
+					{user?.b_balance
+						? Number(user?.b_balance).toFixed(2)
+						: Number(0).toFixed(2)}
+					$
 				</h1>
 			</div>
 			<div className='grid grid-cols-2 gap-4 text-[0.6rem] md:text-sm'>

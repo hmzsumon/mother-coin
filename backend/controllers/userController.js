@@ -151,10 +151,9 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
 			country,
 		},
 		email_verify_code: verify_code,
-		signup_bonus: 2,
-		b_balance: 2,
-		usd_balance: 2,
-		mc_balance: 2,
+		signup_bonus: 5,
+		usd_balance: 5,
+		mc_balance: 5,
 	});
 
 	// create withdraw details

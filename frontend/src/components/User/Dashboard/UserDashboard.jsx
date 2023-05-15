@@ -34,7 +34,7 @@ const UserDashboard = () => {
 					{/* <UserInfo user={user} /> */}
 					<WalletCard01 user={user} />
 					<WalletCard02 user={user} />
-					<EarnCard />
+					<EarnCard user={user} />
 					<FreeMing />
 					{/* <Menu /> */}
 
