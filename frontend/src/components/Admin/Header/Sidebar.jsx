@@ -95,7 +95,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
 					</button>
 					{/* Logo */}
 					<NavLink end to='/' className='block'>
-						<img src='/images/logo.png' alt='Logo' className='w-20 ' />
+						<img src='/images/logo-white.png' alt='Logo' className='w-20 ' />
 					</NavLink>
 				</div>
 
