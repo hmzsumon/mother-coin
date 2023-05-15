@@ -24,7 +24,7 @@ exports.createPrice = catchAsyncErrors(async (req, res, next) => {
 		if (user.balance === 0) {
 			return;
 		}
-		user.balance = user.gem_coin * pxcPrice.price;
+		user.usd_balance = user.gem_coin * pxcPrice.price;
 		await user.save();
 	});
 
