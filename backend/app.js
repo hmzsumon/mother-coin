@@ -33,6 +33,7 @@ const verify = require('./routes/verifyRoute');
 const draw = require('./routes/drawRoute');
 const convert = require('./routes/convertRoute');
 const shareCard = require('./routes/shareCardRoute');
+const price = require('./routes/priceRoute');
 
 app.use('/api/v1', user);
 app.use('/api/v1', transaction);
@@ -46,6 +47,7 @@ app.use('/api/v1', verify);
 app.use('/api/v1', draw);
 app.use('/api/v1', convert);
 app.use('/api/v1', shareCard);
+app.use('/api/v1', price);
 
 app.use(express.static(path.join(__dirname, '../frontend/build')));
 

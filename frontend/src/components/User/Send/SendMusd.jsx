@@ -4,15 +4,18 @@ import { TextField } from '@mui/material';
 import GoBack from '../../../global/GoBack';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useSendMotherCoinMutation } from '../../../features/auth/authApi';
+import {
+	useSendMotherCoinMutation,
+	useSendMusdMutation,
+} from '../../../features/auth/authApi';
 import { toast } from 'react-toastify';
 import ButtonLoader from '../../../global/ButtonLoader';
 
-const SendMoney = () => {
+const SendMusd = () => {
 	const navigate = useNavigate();
 	const { user } = useSelector((state) => state.auth);
-	const [sendMotherCoin, { isError, isLoading, error, isSuccess }] =
-		useSendMotherCoinMutation();
+	const [sendMusd, { isError, isLoading, error, isSuccess }] =
+		useSendMusdMutation();
 	const [amount, setAmount] = useState(0);
 	const [address, setAddress] = useState('');
 
@@ -31,7 +34,7 @@ const SendMoney = () => {
 			return;
 		}
 
-		sendMotherCoin({ amount, address, user_id: user?.id });
+		sendMusd({ amount, address });
 	};
 
 	useEffect(() => {
@@ -58,7 +61,7 @@ const SendMoney = () => {
 						</h1>
 						<div>
 							<p className='text-xs italic text-center text-green-500 '>
-								Your current balance is :{user?.usd_balance}{' '}
+								Your current balance is :{user?.musd_balance}{' '}
 							</p>
 						</div>
 					</div>
@@ -72,7 +75,7 @@ const SendMoney = () => {
 								<div>
 									<div>
 										<label className='text-xs font-semibold text-slate-500'>
-											Receiver Mother Coin Address
+											Receiver MUSD Address
 										</label>
 										<input
 											type='text'
@@ -125,4 +128,4 @@ const SendMoney = () => {
 	);
 };
 
-export default SendMoney;
+export default SendMusd;

@@ -15,6 +15,9 @@ const {
 	getSingleUserAdmin,
 	forgotPassword,
 	resetPassword,
+	findUserByMotherCoinAddress,
+	sendMotherCoin,
+	sendMusd,
 } = require('../controllers/userController');
 
 const { isAuthenticatedUser, authorizeRoles } = require('../middleware/auth');
@@ -65,5 +68,18 @@ router.route('/forgot-password').post(upload.none(), forgotPassword);
 
 // reset password
 router.route('/password/reset').post(upload.none(), resetPassword);
+
+// find user by address
+router
+	.route('/find-user-by-mother-coin-address')
+	.get(findUserByMotherCoinAddress);
+
+// send mother coin
+router
+	.route('/send/mc')
+	.post(upload.none(), isAuthenticatedUser, sendMotherCoin);
+
+// send musd
+router.route('/send/musd').post(upload.none(), isAuthenticatedUser, sendMusd);
 
 module.exports = router;

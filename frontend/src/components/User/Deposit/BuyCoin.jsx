@@ -5,50 +5,59 @@ import { methods } from '../../../utils/methods';
 import CopyToClipboardButton from '../../../global/CopyToClipboardButton';
 
 import BeatLoader from 'react-spinners/BeatLoader';
-import { useNavigate } from 'react-router-dom';
-// import { useBuyTrxcMutation } from '../../../features/pxc.js/pxcApi';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useNewDepositMutation } from '../../../features/deposit/depositApi';
 
 const BuyCoin = () => {
+	const location = useLocation();
+	const { state } = location;
+	const { coin } = state;
 	const navigate = useNavigate();
-	// const [buyTrxc, { isLoading, isError, isSuccess, error }] =
-	// 	useBuyTrxcMutation();
+	const [newDeposit, { isLoading, isSuccess, error, isError }] =
+		useNewDepositMutation();
 	const [amount, setAmount] = useState(0);
 	const [sMethod, setSMethod] = useState(methods[0]);
 	const [next, setNext] = useState(false);
 	const [txid, setTxid] = useState('');
-	const [isLoading, setIsLoading] = useState(false);
 
 	const subMitHandler = (e) => {
 		e.preventDefault();
 		const myForm = new FormData();
 		myForm.append('amount', amount);
-		myForm.append('method', sMethod);
+		myForm.append('method', sMethod.name);
 		myForm.append('transactionId', txid);
-		myForm.append('walletName', sMethod.name);
-		myForm.append('walletAddress', sMethod.address);
+		myForm.append('wallet', sMethod.name);
+		myForm.append('wallet_address', sMethod.address);
+		myForm.append('coin', coin);
 
 		for (var pair of myForm.entries()) {
 			console.log(pair[0] + ', ' + pair[1]);
 		}
-		// buyTrxc(myForm);
+		newDeposit(myForm);
 	};
 
-	// useEffect(() => {
-	// 	if (isError) {
-	// 		toast.error(error.data.message);
-	// 	}
-	// 	if (isSuccess) {
-	// 		toast.success('PXC bought successfully');
-	// 		navigate('/buy-history');
-	// 	}
-	// }, [isSuccess, isError, error, navigate]);
+	useEffect(() => {
+		if (isError) {
+			toast.error(error.data.message);
+		}
+		if (isSuccess) {
+			toast.success('Coin bought successfully');
+			navigate('/my-deposits');
+		}
+	}, [isSuccess, isError, error, navigate]);
 
 	return (
 		<Layout>
 			<div className=''>
 				<div className='px-2 py-4 mx-auto space-y-4 rounded-md bg-stone-800 md:w-10/12'>
 					<div className='text-sm font-bold text-center md:text-2xl'>
-						<h2>Buy Mother Coin</h2>
+						<h2>
+							Buy
+							<span className='mx-2'>
+								{coin === 'mother' ? 'Mother' : 'MUSD'}
+							</span>
+							Coin
+						</h2>
 						<p className='text-[0.6rem] italic'>
 							Minimum: <span className='text-yellow-400'>$10</span>
 						</p>
@@ -78,9 +87,7 @@ const BuyCoin = () => {
 										<li
 											key={id}
 											className={`flex items-center justify-between p-2 list-none border rounded-md cursor-pointer ${
-												method.id === sMethod.id
-													? 'border-yellow-400'
-													: 'border-slate-600'
+												method.id === sMethod.id ? 'bg-stone-700' : ''
 											}`}
 											onClick={() => setSMethod(method)}
 										>

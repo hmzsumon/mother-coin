@@ -10,15 +10,14 @@ const EarnCard = () => {
 	return (
 		<div className='p-4 space-y-4 bg-stone-900 teal-600rounded-md'>
 			<div className='flex items-center '>
-				<p className='text-xl font-semibold text-gray-100'>Earn</p>
+				<p className='text-xs font-semibold text-gray-100'>Airdrop</p>
 			</div>
 
 			<div className='flex items-center space-x-3'>
-				<h1 className='text-xl text-white '>
+				<h1 className='text-xs text-white '>
 					{usdx?.usdx_balance
 						? Number(usdx?.usdx_balance).toFixed(2)
-						: Number(0).toFixed(2)}
-					$
+						: Number(0).toFixed(8)}
 				</h1>
 			</div>
 			<div className='grid grid-cols-2 gap-4 text-[0.6rem] md:text-sm'>

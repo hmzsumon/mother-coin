@@ -17,27 +17,26 @@ const depositSchema = new mongoose.Schema(
 			required: [true, 'Amount is required'],
 		},
 
-		method: {
-			name: {
-				type: String,
-				required: [true, 'Method name is required'],
-			},
-			send_account: {
-				type: String,
-				required: [true, 'Method number is required'],
-			},
-			receive_account: {
-				type: String,
-			},
-			type: {
-				type: String,
-				enum: ['personal', 'agent'],
-			},
-			paidAt: {
-				type: Date,
-				default: Date.now,
-			},
+		coin: {
+			type: String,
+			required: [true, 'Coin is required'],
+			enum: ['mother', 'musd'],
 		},
+
+		method: {
+			type: String,
+		},
+
+		wallet: {
+			type: String,
+			required: [true, 'Wallet is required'],
+		},
+
+		wallet_address: {
+			type: String,
+			required: [true, 'Wallet address is required'],
+		},
+
 		transactionId: {
 			type: String,
 		},
@@ -77,14 +76,6 @@ const depositSchema = new mongoose.Schema(
 		comment: {
 			type: String,
 			default: 'No comment',
-		},
-		screen_shot: {
-			public_id: {
-				type: String,
-			},
-			url: {
-				type: String,
-			},
 		},
 	},
 	{

@@ -4,26 +4,24 @@ import { formatDate } from '../../../utils/functions';
 const ApproveDetails = ({ deposit }) => {
 	return (
 		<div className='my-4 text-xs'>
-			<h2 className=' text-center text-sm italic text-green-500 my-2'>
+			<h2 className='my-2 text-sm italic text-center text-green-500 '>
 				Approved Info
 			</h2>
-			<div className='border px-3 py-2 space-y-1'>
+			<div className='px-3 py-2 space-y-1 border'>
 				{/* Withdraw Date */}
-				<div className=' grid grid-cols-2 list-none'>
+				<div className='grid grid-cols-2 list-none '>
 					<li className='grid grid-cols-2 '>
 						<span>Approved At</span>
 						<span>:</span>
 					</li>
-					<li>{formatDate(deposit?.confirmedAt) || 'Not Approved Yet'}</li>
+					<li>{formatDate(deposit?.approvedAt) || 'Not Approved Yet'}</li>
 				</div>
-				<div className=' grid grid-cols-2 list-none'>
+				<div className='grid grid-cols-2 list-none '>
 					<li className='grid grid-cols-2 '>
 						<span>Approved By</span>
 						<span>:</span>
 					</li>
-					<li>
-						{deposit?.update_by?.name ? deposit?.update_by?.name : 'Admin'}
-					</li>
+					<li>{deposit?.approved_by ? deposit?.approved_by : 'Admin'}</li>
 				</div>
 
 				{deposit?.method === 'bank' && (

@@ -5,7 +5,7 @@ export const priceApi = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
 		// get prices
 		getPrices: builder.query({
-			query: () => '/pxc-prices',
+			query: () => '/prices',
 			providesTags: ['Prices'],
 
 			async onQueryStarted({ dispatch, queryFulfilled }) {
@@ -15,7 +15,16 @@ export const priceApi = apiSlice.injectEndpoints({
 				dispatch(setLastPrice(result.data.lastPrice));
 			},
 		}),
+		// cerate new price
+		createPrice: builder.mutation({
+			query: (body) => ({
+				url: '/create-price',
+				method: 'POST',
+				body,
+			}),
+			invalidatesTags: ['Prices'],
+		}),
 	}),
 });
 
-export const { useGetPricesQuery } = priceApi;
+export const { useGetPricesQuery, useCreatePriceMutation } = priceApi;

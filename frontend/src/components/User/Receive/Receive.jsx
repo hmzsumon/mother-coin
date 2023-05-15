@@ -33,7 +33,12 @@ const Receive = () => {
 							{state === 'musd-address' && user?.musd_address}
 						</span>
 					</h3>
-					<CopyToClipboardButton text={user?.customer_id} btnText='Copy' />
+					{state === 'mother-coin-address' && (
+						<CopyToClipboardButton text={user?.customer_id} btnText='Copy' />
+					)}
+					{state === 'musd-address' && (
+						<CopyToClipboardButton text={user?.musd_address} btnText='Copy' />
+					)}
 				</div>
 			</div>
 		</Layout>

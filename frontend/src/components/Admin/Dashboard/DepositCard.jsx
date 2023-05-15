@@ -7,16 +7,16 @@ const DepositCard = ({ title = 'Admin Info', deposit }) => {
 			<div className='my-2 space-y-2 '>
 				<div className='flex items-center justify-between'>
 					<p className='text-xs italic font-semibold'>
-						New Request:&#8354; {deposit?.new_deposit_amount}
+						New Request:$ {deposit?.new_deposit_amount}
 						<sup className='text-orange-500'>{deposit?.new_deposit_count}</sup>
 					</p>
 					<p className='text-xs italic font-semibold'>
-						Pending: {deposit?.pending}
+						Pending: {deposit?.new_deposit_count}
 					</p>
 				</div>
 				<div className='flex items-center justify-between'>
 					<p className='text-xs italic font-semibold'>
-						Total deposit:&#8354; {deposit?.totalDepositAmount}
+						Total deposit:$ {deposit?.totalDepositAmount}
 						<sup className='text-orange-500'>{deposit?.todayDepositCount}</sup>
 					</p>
 					<p className='text-xs italic font-semibold'>

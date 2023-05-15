@@ -323,6 +323,14 @@ const companySchema = new Schema(
 				type: Number,
 				default: 0,
 			},
+			total_mother_coin: {
+				type: Number,
+				default: 0,
+			},
+			total_musd: {
+				type: Number,
+				default: 0,
+			},
 			d_rejected_ids: [],
 		},
 

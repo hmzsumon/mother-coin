@@ -10,7 +10,8 @@ const DepositDetails = ({ deposit }) => {
 		method,
 		transactionId,
 		createdAt,
-		screen_shot,
+		coin,
+		wallet_address,
 	} = deposit || {};
 	return (
 		<div>
@@ -47,27 +48,21 @@ const DepositDetails = ({ deposit }) => {
 											<span>Amount</span>
 											<span>:</span>
 										</li>
-										<li>{amount}&#8354;</li>
+										<li>{amount}$</li>
 									</div>
 									<div className='grid grid-cols-2 list-none '>
 										<li className='grid grid-cols-2 '>
 											<span>Method</span>
 											<span>:</span>
 										</li>
-										<li>{method?.name}</li>
+										<li>{method}</li>
 									</div>
 									<div className='grid grid-cols-2 list-none '>
 										<li className='grid grid-cols-2'>
-											<span>
-												Your {method?.name ? method?.name : 'Method'} Number
-											</span>
+											<span>Wallet Address </span>
 											<span>:</span>
 										</li>
-										<li className='text-[0.6rem] '>
-											{method?.send_account
-												? method?.send_account
-												: 'No Number'}
-										</li>
+										<li className='text-[0.6rem] '>{wallet_address}</li>
 									</div>
 									<div className='grid grid-cols-2 list-none '>
 										<li className='grid grid-cols-2 '>
@@ -78,14 +73,10 @@ const DepositDetails = ({ deposit }) => {
 									</div>
 									<div className='grid grid-cols-2 list-none '>
 										<li className='grid grid-cols-2 '>
-											<span>Paid At</span>
+											<span>Coin</span>
 											<span>:</span>
 										</li>
-										<li>
-											{method?.paidAt
-												? formatDate(method?.paidAt)
-												: 'Not Paid Yet'}
-										</li>
+										<li>{coin}</li>
 									</div>
 									<div className='grid grid-cols-2 list-none '>
 										<li className='grid grid-cols-2 '>
@@ -96,27 +87,11 @@ const DepositDetails = ({ deposit }) => {
 									</div>
 								</div>
 							</div>
-							<div className='p-3 border'>
-								<h2 className='text-xs italic text-center'>
-									Screenshot of{' '}
-									<span className='text-green-500'>
-										{method?.name ? method?.name : 'Method'}
-									</span>{' '}
-									payment{' '}
-								</h2>
-								<div className='w-[50%] mx-auto my-2'>
-									<img
-										src={screen_shot ? screen_shot.url : ''}
-										alt='screenshot'
-										className='w-full '
-									/>
-								</div>
-							</div>
 						</div>
 					</div>
-					<div className='flex flex-col items-center justify-center my-4'>
+					{/* <div className='flex flex-col items-center justify-center my-4'>
 						<GoBack />
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</div>

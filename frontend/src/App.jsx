@@ -57,6 +57,9 @@ import Assets from './components/User/Assets/Assets';
 import Trade from './components/User/Trade/Trade';
 import Mining from './components/User/Mining/Mining';
 import Receive from './components/User/Receive/Receive';
+import PriceList from './components/Admin/Price/PriceList';
+import CreatePrice from './components/Admin/Price/CreatePrice';
+import SendMusd from './components/User/Send/SendMusd';
 
 const App = () => {
 	return (
@@ -84,6 +87,9 @@ const App = () => {
 
 					<Route path='/admin/users' element={<Users />} />
 					<Route path='/admin/user/details/:id' element={<UserDetails />} />
+
+					<Route path='/admin/price-list' element={<PriceList />} />
+					<Route path='/create-price' element={<CreatePrice />} />
 				</Route>
 				{/* User Route */}
 				<Route element={<PrivetRoute />}>
@@ -108,6 +114,7 @@ const App = () => {
 					<Route path='/transactions' element={<Transactions />} />
 					<Route path='/convert' element={<Convert />} />
 					<Route path='/send' element={<SendMoney />} />
+					<Route path='/send/musd' element={<SendMusd />} />
 
 					<Route path='/new-withdraw' element={<NewWithdraw />} />
 					<Route path='/my-withdraws' element={<MyWithdraws />} />

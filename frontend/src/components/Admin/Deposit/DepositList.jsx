@@ -28,7 +28,7 @@ const DepositList = () => {
 			headerName: 'Date',
 			width: 150,
 			renderCell: (params) => (
-				<div className='flex text-xs items-center gap-2'>
+				<div className='flex items-center gap-2 text-xs'>
 					<p>{params.row.date}</p>
 				</div>
 			),
@@ -38,7 +38,7 @@ const DepositList = () => {
 			headerName: 'Name',
 			width: 160,
 			renderCell: (params) => (
-				<div className='flex text-xs items-center gap-2'>
+				<div className='flex items-center gap-2 text-xs'>
 					<p>{params.row.name}</p>
 				</div>
 			),
@@ -51,8 +51,8 @@ const DepositList = () => {
 			sortable: false,
 			width: 160,
 			renderCell: (params) => (
-				<div className='flex text-xs items-center gap-2'>
-					<p>&#8354; {params.row.amount} </p>
+				<div className='flex items-center gap-2 text-xs'>
+					<p>$ {params.row.amount} </p>
 				</div>
 			),
 		},
@@ -62,8 +62,20 @@ const DepositList = () => {
 			width: 150,
 			renderCell: (params) => (
 				<div className='flex flex-col items-start text-[0.6rem] gap-1'>
-					<p>{params.row.method.name}</p>
-					<p>{params.row.method.send_account}</p>
+					<p>{params.row.method}</p>
+				</div>
+			),
+		},
+		{
+			field: 'coin',
+			headerName: 'Coin',
+			width: 150,
+			renderCell: (params) => (
+				<div className='flex flex-col items-start text-[0.6rem] gap-1'>
+					{params.row.coin === 'mother' && (
+						<p className='text-green-500'>Mother</p>
+					)}
+					{params.row.coin === 'musd' && <p className='text-green-500'>MUSD</p>}
 				</div>
 			),
 		},
@@ -75,7 +87,7 @@ const DepositList = () => {
 				return (
 					<div className='flex items-center'>
 						{params.row.status === 'pending' && (
-							<p className='text-red-500 text-xs'>Pending</p>
+							<p className='text-xs text-red-500'>Pending</p>
 						)}
 						{params.row.status === 'approved' && (
 							<p className='text-green-500'>
@@ -117,7 +129,7 @@ const DepositList = () => {
 					)}
 					{params.row.status === 'pending' && (
 						<div>
-							<p className=' text-yellow-500 text-xs flex flex-col  '>
+							<p className='flex flex-col text-xs text-yellow-500 '>
 								No Update Yet
 							</p>
 						</div>
@@ -154,6 +166,7 @@ const DepositList = () => {
 				name: deposit.name,
 				date: formatDate(deposit.createdAt),
 				method: deposit.method,
+				coin: deposit.coin,
 				status: deposit.status,
 				update: deposit.updated,
 				amount: deposit.amount,
@@ -172,7 +185,7 @@ const DepositList = () => {
 				</div>
 			) : (
 				<div className='p-4'>
-					<div className='w-full shadow-lg rounded-xl' style={{ height: 470 }}>
+					<div className='w-full shadow-lg' style={{ height: 470 }}>
 						<DataGrid
 							rows={rows}
 							columns={columns}

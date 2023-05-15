@@ -25,7 +25,7 @@ const MyDeposits = () => {
 			width: 100,
 			renderCell: (params) => (
 				<div className='flex items-center gap-2'>
-					<p>&#8354; {Number(params.row.amount).toLocaleString()}</p>
+					<p>$ {Number(params.row.amount).toLocaleString()}</p>
 				</div>
 			),
 		},
@@ -65,7 +65,7 @@ const MyDeposits = () => {
 
 					<div className=' text-[0.6rem]'>
 						{params.row.status === 'rejected' && (
-							<p className='text-red-500 flex flex-col'>
+							<p className='flex flex-col text-red-500'>
 								<span>Rejected By Admin</span>
 								<span>{params.row.reason}</span>
 							</p>
@@ -74,7 +74,7 @@ const MyDeposits = () => {
 							<p className='text-green-500'>Approved</p>
 						)}
 						{params.row.status === 'pending' && (
-							<p className='text-orange-500 text-xs'>Pending</p>
+							<p className='text-xs text-orange-500'>Pending</p>
 						)}
 					</div>
 				</>
@@ -92,7 +92,7 @@ const MyDeposits = () => {
 					<p className='text-red-500'>
 						{params.row.status === 'rejected' && params.row.comment}
 					</p>
-					<p className='text-orange-500 text-xs'>
+					<p className='text-xs text-orange-500'>
 						{params.row.status === 'pending' && 'Pending'}
 					</p>
 				</div>
@@ -122,7 +122,7 @@ const MyDeposits = () => {
 				id: deposit._id,
 				name: deposit.name,
 				date: formatDate(deposit.createdAt),
-				method: deposit.method.name,
+				method: deposit.method,
 				status: deposit.status,
 				amount: deposit.amount,
 				comment: deposit.comment,
@@ -142,7 +142,7 @@ const MyDeposits = () => {
 			) : (
 				<div className='px-1 md:p-4'>
 					<div
-						className='w-full shadow-lg rounded-xl text-xs data-table '
+						className='w-full text-xs rounded shadow-lg data-table '
 						style={{ height: 470 }}
 					>
 						<DataGrid

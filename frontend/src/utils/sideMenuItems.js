@@ -1,7 +1,7 @@
 import { AiOutlineDownload, AiOutlineUpload } from 'react-icons/ai';
 
 import { FiUsers, FiGift } from 'react-icons/fi';
-import { GiMining } from 'react-icons/gi';
+import { GiPriceTag } from 'react-icons/gi';
 import { MdOutlineDashboard } from 'react-icons/md';
 import { MdOutlineVerifiedUser } from 'react-icons/md';
 
@@ -37,9 +37,9 @@ const sideMenuItems = [
 
 	{
 		id: 5,
-		name: 'lotteries',
-		icon: <FiGift />,
-		path: '/admin/lotteries',
+		name: 'Price',
+		icon: <GiPriceTag />,
+		path: '/admin/price-list',
 		role: 'admin',
 	},
 

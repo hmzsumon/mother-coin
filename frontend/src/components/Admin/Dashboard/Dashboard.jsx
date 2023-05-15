@@ -26,7 +26,7 @@ const AdminDashboard = ({ user }) => {
 					<h2>Admin Dashboard</h2>
 					<div className='grid grid-cols-1 gap-4 md:grid-cols-4 '>
 						<UsersCard title='Users Info' users={company?.users} />
-						<CostCard title='Cost Info' cost={company?.cost} />
+						{/* <CostCard title='Cost Info' cost={company?.cost} /> */}
 						<DepositCard title='Deposit Info' deposit={company?.deposit} />
 						{/* <LotteryCard title='Lottery Info' lottery={company?.lottery} /> */}
 						<WithdrawCard title='Withdraw Info' withdraw={company?.withdraw} />

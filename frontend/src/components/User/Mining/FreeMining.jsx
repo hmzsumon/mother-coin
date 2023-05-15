@@ -96,10 +96,10 @@ const FreeMing = () => {
 		content = (
 			<div className='flex items-center justify-center space-x-2'>
 				<NavLink
-					to='/buy-trxc'
+					to='/buy-coin'
 					className='px-3 py-2 font-bold text-center text-gray-100 bg-yellow-600 rounded-sm'
 				>
-					Buy TRXC
+					Buy Mother
 				</NavLink>
 			</div>
 		);
@@ -127,14 +127,14 @@ const FreeMing = () => {
 
 	return (
 		<div className='p-4 space-y-4 rounded-md bg-stone-900'>
-			<div className='flex items-center justify-center gap-4 text-center '>
+			<div className='flex items-center  gap-4  '>
 				<div>
-					<img src={MiningGif} alt='mining' className='mx-auto w-14 h-14' />
-				</div>
-				<div>
-					<span className='text-xs font-bold text-gray-100'>
-						Mother Coin (Mining)
-					</span>
+					<div className=' flex items-center'>
+						<h1 className='text-xs font-bold text-gray-100'>Mining</h1>
+						<div>
+							<img src={MiningGif} alt='mining' className='mx-auto w-8 h-8' />
+						</div>
+					</div>
 					<div className=''>
 						{miningLoading ? (
 							<PropagateLoader color='#fff' />

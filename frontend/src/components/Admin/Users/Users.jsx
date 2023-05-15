@@ -140,7 +140,7 @@ const Users = () => {
 				</div>
 			) : (
 				<div className='p-4'>
-					<div className='w-full shadow-lg rounded-xl' style={{ height: 470 }}>
+					<div className='w-full rounded shadow-lg' style={{ height: 470 }}>
 						<DataGrid
 							rows={rows}
 							columns={columns}

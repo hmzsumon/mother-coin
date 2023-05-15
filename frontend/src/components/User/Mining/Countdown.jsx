@@ -22,8 +22,8 @@ const Countdown = ({ profit }) => {
 
 	return (
 		<>
-			<h1 className='text-xl italic font-bold text-gray-100 '>
-				{stateProfit ? stateProfit.toFixed(8) : Number(0).toFixed(8)}$
+			<h1 className='text-xs  font-bold text-gray-100 '>
+				{stateProfit ? stateProfit.toFixed(8) : Number(0).toFixed(8)}
 			</h1>
 		</>
 	);

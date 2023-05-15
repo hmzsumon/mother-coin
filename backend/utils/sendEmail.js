@@ -10,7 +10,7 @@ const sendEmail = async (option) => {
 		const apiInstance = new Sib.TransactionalEmailsApi();
 		const sendSmtpEmail = new Sib.SendSmtpEmail();
 		sendSmtpEmail.subject = option.subject;
-		sendSmtpEmail.htmlContent = option.message;
+		sendSmtpEmail.textContent = option.message;
 		sendSmtpEmail.sender = {
 			name: 'Mother Coin',
 			email: 'motherwallet9@gmail.com',

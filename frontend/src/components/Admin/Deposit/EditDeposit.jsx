@@ -24,7 +24,7 @@ const EditDeposit = () => {
 					<DepositDetails deposit={deposit} />
 					{deposit?.status === 'pending' && <Approve id={id} />}
 					{/* Approved Details */}
-					{deposit?.status === 'success' && (
+					{deposit?.status === 'approved' && (
 						<ApproveDetails deposit={deposit} />
 					)}
 					{deposit?.status === 'cancelled' && (

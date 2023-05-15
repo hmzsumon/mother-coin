@@ -23,14 +23,7 @@ const menuItems = [
 		subItems: [],
 		isSubMenu: false,
 	},
-	{
-		id: 2,
-		title: 'Reward Center',
-		icon: <FaCoins />,
-		path: '/coming-soon',
-		subItems: [],
-		isSubMenu: false,
-	},
+
 	{
 		id: 5,
 		title: 'My Referral',
@@ -39,25 +32,14 @@ const menuItems = [
 		subItems: [],
 		isSubMenu: false,
 	},
-	{
-		id: 6,
-		title: 'Announcement',
-		icon: <SiMarketo />,
-		path: '/coming-soon',
-	},
-	{
-		id: 7,
-		title: 'Create New Account',
-		icon: <GiMining />,
-		path: '/coming-soon',
-	},
 
 	{
-		id: 8,
-		title: 'Mother Community',
-		icon: <BsCashCoin />,
-		path: '/coming-soon',
+		id: 6,
+		title: 'Buy History',
+		icon: <FaCoins />,
+		path: '/my-deposits',
 	},
+
 	{
 		id: 14,
 		title: 'KYC',

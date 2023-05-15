@@ -167,8 +167,8 @@ export const authApi = apiSlice.injectEndpoints({
 
 		// get user by phone
 		getUserByPhone: builder.query({
-			query: (phone) => ({
-				url: `/user?phone=${phone}`,
+			query: (address) => ({
+				url: `/user?address=${address}`,
 				method: 'GET',
 			}),
 			providesTags: ['Users', 'User'],
@@ -210,6 +210,35 @@ export const authApi = apiSlice.injectEndpoints({
 			}),
 			providesTags: ['Users', 'User'],
 		}),
+
+		// find user by address
+		findUserByAddress: builder.query({
+			query: (address) => ({
+				url: `/find-user-by-mother-coin-address?address=${address}`,
+				method: 'GET',
+			}),
+			providesTags: ['Users', 'User'],
+		}),
+
+		// send mother coin
+		sendMotherCoin: builder.mutation({
+			query: (body) => ({
+				url: '/send/mc',
+				method: 'POST',
+				body,
+			}),
+			invalidatesTags: ['Users', 'User'],
+		}),
+
+		// send musd
+		sendMusd: builder.mutation({
+			query: (body) => ({
+				url: '/send/musd',
+				method: 'POST',
+				body,
+			}),
+			invalidatesTags: ['Users', 'User'],
+		}),
 	}),
 });
 
@@ -231,4 +260,7 @@ export const {
 	useGetMembersQuery,
 	useGetAllUsersQuery,
 	useGetSingleUserAdminQuery,
+	useFindUserByAddressQuery,
+	useSendMotherCoinMutation,
+	useSendMusdMutation,
 } = authApi;

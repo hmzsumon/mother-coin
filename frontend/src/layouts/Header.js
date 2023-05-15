@@ -27,7 +27,7 @@ const navItems = [
 function Header() {
 	const location = useLocation();
 	const referral_id = location.search.split('=')[1];
-	const { isAuthenticated } = useSelector((state) => state.auth);
+	const { isAuthenticated, user } = useSelector((state) => state.auth);
 	/* for sticky header */
 	const [headerFix, setheaderFix] = React.useState(false);
 	useEffect(() => {
@@ -80,7 +80,10 @@ function Header() {
 								))}
 							</div>
 							{isAuthenticated ? (
-								<Link to='/dashboard' className='text-xs text-white '>
+								<Link
+									to={user.role === 'admin' ? '/admin-dashboard' : '/dashboard'}
+									className='text-xs text-white '
+								>
 									Dashboard
 								</Link>
 							) : (

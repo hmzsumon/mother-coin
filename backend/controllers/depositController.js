@@ -8,6 +8,7 @@ const { sendEmail } = require('../utils/sendEmail');
 const cloudinary = require('cloudinary');
 const Company = require('../models/companyModel');
 const companyId = process.env.COMPANY_ID;
+const getCurrentPrice = require('../utils/currentPrice');
 
 // Create a new deposit
 exports.createDeposit = catchAsyncErrors(async (req, res, next) => {
@@ -34,56 +35,34 @@ exports.createDeposit = catchAsyncErrors(async (req, res, next) => {
 	}
 
 	// console.log(req.body);
-	const {
-		amount,
-		sMethod,
-		transactionId,
-		method_name,
-		send_account,
-		receive_account,
-		type,
-	} = req.body;
-
+	const { amount, method, transactionId, wallet, wallet_address, coin } =
+		req.body;
+	console.log(req.body);
 	// convert amount to number
 	const numAmount = Number(amount);
 
-	// // unique transactionId
+	// unique transactionId
 	const isTransactionIdExist = await Deposit.findOne({ transactionId });
 	if (isTransactionIdExist) {
 		return next(new ErrorHander('Transaction ID already exist', 400));
 	}
 
-	const result = await cloudinary.v2.uploader.upload(req.file.path, {
-		folder: 'deposit-documents',
-	});
-
+	// create new deposit
 	const newDeposit = await Deposit.create({
 		user_id: req.user.id,
 		name: user.name,
 		phone: user.phone,
 		amount: numAmount,
-		method: {
-			name: method_name,
-			send_account: send_account,
-			receive_account: receive_account,
-			type: type,
-		},
+		coin,
+		method,
+		wallet,
+		wallet_address,
 		transactionId,
-		screen_shot: {
-			public_id: result.public_id,
-			url: result.secure_url,
-		},
 	});
 
-	// update deposit details
-	if (user.is_newUser) {
-		depositDetails.is_new = true;
-		await depositDetails.save();
-	}
-
-	// update company balance
-	company.deposit.new_deposit_amount += numAmount;
+	// update company
 	company.deposit.new_deposit_count += 1;
+	company.deposit.new_deposit_amount += numAmount;
 	await company.save();
 
 	// send email to user
@@ -102,7 +81,7 @@ exports.createDeposit = catchAsyncErrors(async (req, res, next) => {
 	res.status(201).json({
 		success: true,
 		message: 'Deposit request received successfully',
-		deposit: newDeposit,
+		// deposit: newDeposit,
 	});
 });
 
@@ -226,15 +205,6 @@ exports.approveDeposit = catchAsyncErrors(async (req, res, next) => {
 		return next(new ErrorHander('No user found with that ID', 404));
 	}
 
-	// find sponsor sponsor.sponsor_id
-	let sponsorId = user.sponsor.sponsor_id
-		? user.sponsor.sponsor_id
-		: process.env.DEFAULT_REFERRAL_ID;
-	const sponsor = await User.findById(sponsorId);
-	if (!sponsor) {
-		return next(new ErrorHander('No sponsor found with that ID', 404));
-	}
-
 	// find DepositDetails
 	const depositDetails = await DepositDetails.findOne({ user_id: user._id });
 	if (!depositDetails) {
@@ -245,6 +215,11 @@ exports.approveDeposit = catchAsyncErrors(async (req, res, next) => {
 	const company = await Company.findById(companyId);
 	if (!company) {
 		return next(new ErrorHander('Company not found', 400));
+	}
+
+	// check if deposit is already approved
+	if (deposit.is_approved) {
+		return next(new ErrorHander('Deposit is already approved', 400));
 	}
 
 	//update deposit details
@@ -258,74 +233,37 @@ exports.approveDeposit = catchAsyncErrors(async (req, res, next) => {
 	await deposit.save();
 
 	// update user
-	user.m_balance += deposit.amount;
-	createTransaction(
-		user._id,
-		'cashIn',
-		deposit.amount,
-		'deposit',
-		'Approved Deposit'
-	);
-
-	if (user.is_newUser) {
-		depositDetails.first_deposit_amount += deposit.amount;
-		depositDetails.first_deposit_date = Date.now();
-		depositDetails.s_bonus += deposit.amount * 0.1;
-		depositDetails.is_new = false;
-
-		company.cost.referral_bonus_cost += deposit.amount * 0.1;
-		company.cost.total_cost += deposit.amount * 0.1;
-		company.cost.today_cost += deposit.amount * 0.1;
-		company.users.total_active_users += 1;
-		company.users.new_users -= 1;
-		company.deposit.total_d_bonus += deposit.amount * 0.1;
-
-		// update sponsor
-		sponsor.sponsor_bonus += deposit.amount * 0.1;
-		sponsor.b_balance += deposit.amount * 0.1;
+	if (deposit.coin === 'mother') {
+		const price = await getCurrentPrice();
+		const mc = deposit.amount / price;
+		user.mc_balance += mc;
+		user.usd_balance += deposit.amount;
 		createTransaction(
-			sponsor._id,
+			user._id,
 			'cashIn',
-			deposit.amount * 0.1,
-			'sponsor_bonus',
-			`Sponsor bonus for ${user.name} first deposit`
+			deposit.amount,
+			'deposit',
+			'Approved Deposit'
 		);
-		// update user
-		user.is_newUser = false;
-		user.is_active = true;
-	} else {
-		sponsor.sponsor_bonus += deposit.amount * 0.05;
-		sponsor.b_balance += deposit.amount * 0.05;
+	}
+
+	if (deposit.coin === 'musd') {
+		user.musd_balance += deposit.amount;
 		createTransaction(
-			sponsor._id,
+			user._id,
 			'cashIn',
-			deposit.amount * 0.05,
-			'sponsor_bonus',
-			`Sponsor bonus for ${user.name} first deposit`
+			deposit.amount,
+			'deposit',
+			'Approved Deposit'
 		);
-
-		company.cost.referral_bonus_cost += deposit.amount * 0.05;
-		company.cost.total_cost += deposit.amount * 0.05;
-		company.cost.today_cost += deposit.amount * 0.05;
-		company.deposit.total_d_bonus += deposit.amount * 0.05;
-
-		depositDetails.s_bonus += deposit.amount * 0.05;
 	}
-	// amount > 500
-	if (deposit.amount > 499) {
-		user.b_balance += 100;
-		createTransaction(user._id, 'cashIn', 100, 'bonus', 'Deposit bonus');
-		depositDetails.bonus += 100;
-		company.cost.total_cost += 100;
-		company.cost.today_cost += 100;
-	}
+
 	// update deposit details
 	depositDetails.total_deposit += deposit.amount;
 	depositDetails.last_deposit_amount += deposit.amount;
 	depositDetails.last_deposit_date = Date.now();
 	await depositDetails.save();
 
-	await sponsor.save();
 	await user.save();
 
 	// update company balance
@@ -333,8 +271,12 @@ exports.approveDeposit = catchAsyncErrors(async (req, res, next) => {
 	company.deposit.new_deposit_count -= 1;
 	company.deposit.totalDepositAmount += deposit.amount;
 	company.deposit.totalDepositCount += 1;
-	company.deposit.todayDepositCount += 1;
-	company.deposit.todayDepositAmount += deposit.amount;
+	if (deposit.coin === 'mother') {
+		company.deposit.total_mother_coin += deposit.amount;
+	}
+	if (deposit.coin === 'musd') {
+		company.deposit.total_musd += deposit.amount;
+	}
 	await company.save();
 
 	// send email to user
@@ -344,23 +286,6 @@ exports.approveDeposit = catchAsyncErrors(async (req, res, next) => {
 		message: `Dear ${user.name},\n\nYour deposit of ${deposit.amount} has been approved.\n\nThank you for choosing ${company.name}.`,
 	});
 
-	// send email to sponsor
-	sendEmail({
-		email: sponsor.email,
-		subject: 'Sponsor Bonus',
-		message: `Dear ${sponsor.name},\n\nYou have received a sponsor bonus of ${
-			deposit.amount * 0.1
-		} for ${user.name} first deposit.\n\nThank you for choosing ${
-			company.name
-		}.`,
-	});
-
-	// send email to admin
-	sendEmail({
-		email: company.email,
-		subject: 'Deposit Approved',
-		message: `Dear ${admin.name},\n\n${user.name} deposit of ${deposit.amount} has been approved.\n\nThank you for choosing ${company.name}.`,
-	});
 	res.status(200).json({
 		success: true,
 		message: 'Deposit approved',
@@ -427,13 +352,6 @@ exports.rejectDeposit = catchAsyncErrors(async (req, res, next) => {
 		email: user.email,
 		subject: 'Deposit Rejected',
 		message: `Dear ${user.name},\n\nYour deposit of ${deposit.amount} has been rejected.\n\nReason: ${req.body.reason}\n\nThank you for choosing ${company.name}.`,
-	});
-
-	// send email to admin
-	sendEmail({
-		email: company.email,
-		subject: 'Deposit Rejected',
-		message: `Dear ${admin.name},\n\n${user.name} deposit of ${deposit.amount} has been rejected.\n\nReason: ${req.body.reason}\n\nThank you for choosing ${company.name}.`,
 	});
 
 	res.status(200).json({

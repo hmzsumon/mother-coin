@@ -13,6 +13,8 @@ const { sendEmail } = require('../utils/sendEmail');
 const crypto = require('crypto');
 const cloudinary = require('cloudinary');
 
+const getCurrentPrice = require('../utils/currentPrice');
+
 const createTransaction = require('../utils/tnx');
 const { v4: uuidv4 } = require('uuid');
 
@@ -546,6 +548,28 @@ exports.findUserByPhoneNumber = catchAsyncErrors(async (req, res, next) => {
 	});
 });
 
+// find user by mother_coin_address
+exports.findUserByMotherCoinAddress = catchAsyncErrors(
+	async (req, res, next) => {
+		console.log(req.query);
+		const user = await User.find({ mother_coin_address: req.query.address });
+
+		if (!user) {
+			return next(
+				new ErrorHander(
+					`User does not exist with mother coin address: ${req.query}`,
+					400
+				)
+			);
+		}
+
+		res.status(200).json({
+			success: true,
+			user,
+		});
+	}
+);
+
 // verify email address with code
 exports.verifyEmail = catchAsyncErrors(async (req, res, next) => {
 	// find company
@@ -696,5 +720,118 @@ exports.getSingleUserAdmin = catchAsyncErrors(async (req, res, next) => {
 		withdrawDetails,
 		lotteryDetails,
 		sendDetails,
+	});
+});
+
+// send mother coin to user
+exports.sendMotherCoin = catchAsyncErrors(async (req, res, next) => {
+	const user = await User.findById(req.user.id);
+	if (!user) {
+		return next(new ErrorHander('User not found', 404));
+	}
+	const { amount, address } = req.body;
+	const numAmount = Number(amount);
+	const price = await getCurrentPrice();
+	const sender = await User.findById(req.user.id);
+	if (!sender) {
+		return next(new ErrorHander('User not found', 404));
+	}
+
+	// find receiver
+	const receiver = await User.findOne({ mother_coin_address: address });
+	if (!receiver) {
+		return next(new ErrorHander('Receiver not found', 404));
+	}
+
+	// check if sender has enough balance
+	if (sender.usd_balance < numAmount) {
+		return next(new ErrorHander('Insufficient balance', 400));
+	}
+
+	const mc = numAmount / price;
+	console.log(mc);
+
+	//update sender balance
+	sender.usd_balance -= numAmount;
+	sender.mc_balance -= mc;
+	createTransaction(
+		sender._id,
+		'cashOut',
+		numAmount,
+		'Send mother coin',
+		`Sent ${numAmount} mother coin to ${receiver.name}`
+	);
+	await sender.save();
+
+	// update receiver balance
+	receiver.usd_balance += numAmount;
+	receiver.mc_balance += mc;
+	createTransaction(
+		receiver._id,
+		'cashIn',
+		amount,
+		'Received mother coin',
+		`Received ${numAmount} mother coin from ${sender.name}`
+	);
+	await receiver.save();
+
+	// send email to receiver
+	const message = `You have received ${numAmount} mother coin from ${sender.name}`;
+
+	res.status(200).json({
+		success: true,
+		message: 'Mother coin sent successfully',
+	});
+});
+
+//send musd
+exports.sendMusd = catchAsyncErrors(async (req, res, next) => {
+	const { amount, address } = req.body;
+	const numAmount = Number(amount);
+	const price = await getCurrentPrice();
+	const sender = await User.findById(req.user.id);
+	if (!sender) {
+		return next(new ErrorHander('User not found', 404));
+	}
+
+	// find receiver
+	const receiver = await User.findOne({ musd_address: address });
+	if (!receiver) {
+		return next(new ErrorHander('Receiver not found', 404));
+	}
+
+	// check if sender has enough balance
+	if (sender.musd_balance < numAmount) {
+		return next(new ErrorHander('Insufficient balance', 400));
+	}
+
+	//update sender balance
+	sender.musd_balance -= numAmount;
+	createTransaction(
+		sender._id,
+		'cashOut',
+		numAmount,
+		'Send mother coin',
+		`Sent ${numAmount} mother coin to ${receiver.name}`
+	);
+	await sender.save();
+
+	// update receiver balance
+	receiver.musd_balance += numAmount;
+	createTransaction(
+		receiver._id,
+		'cashIn',
+		amount,
+		'Received mother coin',
+		`Received ${numAmount} mother coin from ${sender.name}`
+	);
+	await receiver.save();
+
+	// send email to receiver
+	const message = `You have received ${numAmount} mother coin from ${sender.name}`;
+
+	res.status(200).json({
+		success: true,
+		message: 'Mother coin sent successfully',
 	});
 });
