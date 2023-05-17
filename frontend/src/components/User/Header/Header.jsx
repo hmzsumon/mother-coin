@@ -6,8 +6,10 @@ import { NavLink } from 'react-router-dom';
 import { BiMenu } from 'react-icons/bi';
 import { FaCoins } from 'react-icons/fa';
 import { AiOutlineUser } from 'react-icons/ai';
+import { useSelector } from 'react-redux';
 
 const Header = ({ handleOpen }) => {
+	const { user } = useSelector((state) => state.auth);
 	return (
 		<div className='flex flex-col px-4 py-3 space-y-6 border-b bg-stone-950 border-slate-700'>
 			<div className='flex items-center justify-between'>
@@ -21,19 +23,26 @@ const Header = ({ handleOpen }) => {
 				</div>
 
 				<div className='flex items-center space-x-3'>
-					{/* <div className='items-center hidden gap-2 p-2 rounded md:flex bg-stone-700'>
+					<div className='items-center hidden gap-2 p-2 rounded md:flex bg-stone-700'>
 						<FaCoins className='text-sm text-gray-100' />
 						<h2 className='text-xs'>
-							<span className='font-bold text-gray-100 '>Balance</span>
-							<span className='font-bold text-green-500'> 0.00</span>
+							<span className='font-bold text-gray-100 '>Balance: </span>
+							<span className='mx-1 font-bold text-green-500'>
+								$
+								{user &&
+									Number(user?.usd_balance + user?.musd_balance).toFixed(
+										2
+									)}{' '}
+								(MUSD)
+							</span>
 						</h2>
-					</div> */}
+					</div>
 					<div className='p-2 rounded bg-stone-700 '>
 						<BsBellFill className='text-sm text-gray-100' />
 					</div>
 					<div className='flex items-center space-x-2'>
 						<AiOutlineUser className='text-xl text-gray-100 ' />
-						<p className='hidden text-xs md:block'>HM Zakaria</p>
+						<p className='hidden text-xs md:block'>{user?.name}</p>
 					</div>
 				</div>
 			</div>

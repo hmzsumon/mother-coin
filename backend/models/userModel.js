@@ -94,13 +94,17 @@ const userSchema = new mongoose.Schema(
 				trim: true,
 			},
 
-			State: {
+			state: {
 				type: String,
 				trim: true,
 			},
 			postcode: {
 				type: String,
 				trim: true,
+			},
+			is_full: {
+				type: Boolean,
+				default: false,
 			},
 		},
 

@@ -3,6 +3,7 @@ import { AiOutlineUser } from 'react-icons/ai';
 import { BiLinkExternal } from 'react-icons/bi';
 
 const Top = ({ user }) => {
+	const balance = Number(user?.usd_balance + user?.musd_balance).toFixed(2);
 	const data = [
 		{
 			id: 1,
@@ -22,7 +23,7 @@ const Top = ({ user }) => {
 		{
 			id: 4,
 			title: 'Balance',
-			value: '$0.00 (MUSD)',
+			value: `$${balance} (MUSD)`,
 		},
 	];
 	return (

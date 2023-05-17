@@ -133,6 +133,7 @@ const App = () => {
 					<Route path='/exchange' element={<Trade />} />
 					<Route path='/mining' element={<Mining />} />
 					<Route path='/receive' element={<Receive />} />
+					<Route path='/profile' element={<Profile />} />
 				</Route>
 				{/* Not Found Page */}
 

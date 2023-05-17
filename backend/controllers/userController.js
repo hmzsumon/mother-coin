@@ -834,3 +834,27 @@ exports.sendMusd = catchAsyncErrors(async (req, res, next) => {
 		message: 'Mother coin sent successfully',
 	});
 });
+
+// update address
+exports.updateAddress = catchAsyncErrors(async (req, res, next) => {
+	const { address, city, state, zip } = req.body;
+	if (!address || !city || !state || !zip) {
+		return next(new ErrorHander('Please enter all fields', 400));
+	}
+	const user = await User.findById(req.user.id);
+	if (!user) {
+		return next(new ErrorHander('User not found', 404));
+	}
+	user.address.address_line1 = address;
+	user.address.city = city;
+	user.address.state = state;
+	user.address.postcode = zip;
+	user.address.is_full = true;
+	await user.save();
+
+	res.status(200).json({
+		success: true,
+		message: 'Address updated',
+		user: user,
+	});
+});

@@ -18,6 +18,7 @@ const {
 	findUserByMotherCoinAddress,
 	sendMotherCoin,
 	sendMusd,
+	updateAddress,
 } = require('../controllers/userController');
 
 const { isAuthenticatedUser, authorizeRoles } = require('../middleware/auth');
@@ -81,5 +82,10 @@ router
 
 // send musd
 router.route('/send/musd').post(upload.none(), isAuthenticatedUser, sendMusd);
+
+// update address
+router
+	.route('/update-address')
+	.put(upload.none(), isAuthenticatedUser, updateAddress);
 
 module.exports = router;

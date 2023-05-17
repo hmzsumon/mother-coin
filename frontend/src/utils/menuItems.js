@@ -54,9 +54,9 @@ const menuItems = [
 	},
 	{
 		id: 15,
-		title: 'Settings',
+		title: 'Profile',
 		icon: <AiFillSetting />,
-		path: '/coming-soon',
+		path: '/profile',
 	},
 	{
 		id: 3,
