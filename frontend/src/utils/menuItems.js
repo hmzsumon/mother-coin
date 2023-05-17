@@ -50,7 +50,7 @@ const menuItems = [
 		id: 9,
 		title: 'Earn & Offer',
 		icon: <BiGame />,
-		path: '/coming-soon',
+		path: '/earn-offer',
 	},
 	{
 		id: 15,
@@ -68,7 +68,7 @@ const menuItems = [
 		id: 4,
 		title: 'Support',
 		icon: <FiUsers />,
-		path: '/coming-soon',
+		path: '/support',
 	},
 ];
 

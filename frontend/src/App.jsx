@@ -61,6 +61,7 @@ import PriceList from './components/Admin/Price/PriceList';
 import CreatePrice from './components/Admin/Price/CreatePrice';
 import SendMusd from './components/User/Send/SendMusd';
 import Security from './components/User/Security/Security';
+import EarnOffer from './components/User/Earn/EarnOffer';
 
 const App = () => {
 	return (
@@ -136,6 +137,7 @@ const App = () => {
 					<Route path='/receive' element={<Receive />} />
 					<Route path='/profile' element={<Profile />} />
 					<Route path='/security' element={<Security />} />
+					<Route path='/earn-offer' element={<EarnOffer />} />
 				</Route>
 				{/* Not Found Page */}
 
