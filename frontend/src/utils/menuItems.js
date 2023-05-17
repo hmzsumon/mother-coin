@@ -62,7 +62,7 @@ const menuItems = [
 		id: 3,
 		title: 'Security',
 		icon: <SiNativescript />,
-		path: '/coming-soon',
+		path: '/security',
 	},
 	{
 		id: 4,

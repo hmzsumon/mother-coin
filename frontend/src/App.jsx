@@ -60,6 +60,7 @@ import Receive from './components/User/Receive/Receive';
 import PriceList from './components/Admin/Price/PriceList';
 import CreatePrice from './components/Admin/Price/CreatePrice';
 import SendMusd from './components/User/Send/SendMusd';
+import Security from './components/User/Security/Security';
 
 const App = () => {
 	return (
@@ -134,6 +135,7 @@ const App = () => {
 					<Route path='/mining' element={<Mining />} />
 					<Route path='/receive' element={<Receive />} />
 					<Route path='/profile' element={<Profile />} />
+					<Route path='/security' element={<Security />} />
 				</Route>
 				{/* Not Found Page */}
 

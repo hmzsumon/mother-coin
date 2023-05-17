@@ -126,17 +126,6 @@ export const authApi = apiSlice.injectEndpoints({
 			}),
 		}),
 
-		// update password
-		updatePassword: builder.mutation({
-			query: (body) => ({
-				url: '/password/update',
-				method: 'PUT',
-				body,
-			}),
-
-			invalidatesTags: ['Users', 'User'],
-		}),
-
 		// admin login
 		adminLogin: builder.mutation({
 			query: (body) => ({
@@ -249,6 +238,17 @@ export const authApi = apiSlice.injectEndpoints({
 			}),
 			invalidatesTags: ['Users', 'User'],
 		}),
+
+		// update password
+		updatePassword: builder.mutation({
+			query: (body) => ({
+				url: '/password/update',
+				method: 'PUT',
+				body,
+			}),
+
+			invalidatesTags: ['Users', 'User'],
+		}),
 	}),
 });
 
@@ -262,7 +262,6 @@ export const {
 	useResendEmailVerificationMutation,
 	useForgotPasswordMutation,
 	useResetPasswordMutation,
-	useUpdatePasswordMutation,
 	useAdminLoginMutation,
 	useNewConvertMutation,
 	useGetUserByPhoneQuery,
@@ -274,4 +273,5 @@ export const {
 	useSendMotherCoinMutation,
 	useSendMusdMutation,
 	useUpdateAddressMutation,
+	useUpdatePasswordMutation,
 } = authApi;
