@@ -105,7 +105,7 @@ const BuyCoin = () => {
 								<button
 									className='w-full px-3 py-2 text-sm font-semibold text-center text-gray-100 list-none bg-yellow-400 rounded-md cursor-pointer disabled:cursor-not-allowed'
 									onClick={() => setNext(true)}
-									disabled={amount <= 14}
+									disabled={amount <= 9}
 								>
 									Next
 								</button>

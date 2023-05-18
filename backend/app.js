@@ -27,13 +27,10 @@ const deposit = require('./routes/depositRoute');
 const email = require('./routes/emailRoute');
 const notice = require('./routes/noticeRoute');
 const withdraw = require('./routes/withdrawRoute');
-const tickets = require('./routes/ticketRoute');
 const company = require('./routes/companyRoute');
 const verify = require('./routes/verifyRoute');
-const draw = require('./routes/drawRoute');
-const convert = require('./routes/convertRoute');
-const shareCard = require('./routes/shareCardRoute');
 const price = require('./routes/priceRoute');
+const mining = require('./routes/miningRoute');
 
 app.use('/api/v1', user);
 app.use('/api/v1', transaction);
@@ -41,13 +38,10 @@ app.use('/api/v1', deposit);
 app.use('/api/v1', email);
 app.use('/api/v1', notice);
 app.use('/api/v1', withdraw);
-app.use('/api/v1', tickets);
 app.use('/api/v1', company);
 app.use('/api/v1', verify);
-app.use('/api/v1', draw);
-app.use('/api/v1', convert);
-app.use('/api/v1', shareCard);
 app.use('/api/v1', price);
+app.use('/api/v1', mining);
 
 app.use(express.static(path.join(__dirname, '../frontend/build')));
 

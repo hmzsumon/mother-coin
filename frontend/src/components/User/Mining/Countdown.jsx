@@ -6,15 +6,17 @@ const Countdown = ({ profit }) => {
 
 	const startTimer = () => {
 		interval = setInterval(() => {
-			setStateProfit((prevState) => prevState + 0.00011574);
-		}, 1000);
+			setStateProfit((prevState) => prevState + 0.000347222222);
+		}, 60000);
 	};
 
 	// componentDidMount
 	useEffect(() => {
+		console.log('profit', profit);
 		if (profit) {
 			startTimer();
 		}
+
 		return () => {
 			clearInterval(interval);
 		};
@@ -23,7 +25,7 @@ const Countdown = ({ profit }) => {
 	return (
 		<>
 			<h1 className='text-xs  font-bold text-gray-100 '>
-				{stateProfit ? stateProfit.toFixed(8) : Number(0).toFixed(8)}
+				{stateProfit ? stateProfit.toFixed(12) : Number(0).toFixed(12)} (Mother)
 			</h1>
 		</>
 	);

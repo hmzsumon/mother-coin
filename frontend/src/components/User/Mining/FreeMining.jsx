@@ -4,10 +4,6 @@ import ButtonLoader from '../../../global/ButtonLoader';
 import { FadeLoader, PropagateLoader } from 'react-spinners';
 import MiningGif from '../../../assets/images/mining.gif';
 
-// import {
-// 	useGetUserTrxcMiningQuery,
-// 	useStartTrxcMiningMutation,
-// } from '../../features/trxc/trxcApi';
 import Countdown from './Countdown';
 
 import Button from '@mui/material/Button';
@@ -17,25 +13,26 @@ import DialogContent from '@mui/material/DialogContent';
 
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
-// import { useTransferTrxMiningProfitMutation } from '../../features/tnx/tnxApi';
+
 import { useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { DialogContentText } from '@mui/material';
+import {
+	useGetMiningQuery,
+	useStartMiningMutation,
+} from '../../../features/mining/miningApi';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
 	return <Slide direction='up' ref={ref} {...props} />;
 });
 
 const FreeMing = () => {
-	// const [startTrxcMining, { isError, isLoading, isSuccess, error }] =
-	// 	useStartTrxcMiningMutation();
+	const [startMining, { isError, isLoading, isSuccess, error }] =
+		useStartMiningMutation();
 
-	// const { data, isLoading: miningLoading } = useGetUserTrxcMiningQuery();
-	// const { trxcMining } = data || {};
-	const trxcMining = false;
-	const miningLoading = false;
-	const isLoading = false;
+	const { data, isLoading: miningLoading } = useGetMiningQuery();
+	const { mining } = data || {};
 	const t_loading = false;
 
 	// const [
@@ -58,9 +55,9 @@ const FreeMing = () => {
 		setOpen(false);
 	};
 
-	// handle start trxc mining
-	const handleStartTrxcMining = async () => {
-		// startTrxcMining();
+	// handle start  mining
+	const handleStartMining = async () => {
+		startMining();
 	};
 
 	const handleTransfer = () => {
@@ -70,14 +67,14 @@ const FreeMing = () => {
 		// }
 	};
 
-	// useEffect(() => {
-	// 	if (isError) {
-	// 		toast.error(error?.data?.message);
-	// 	}
-	// 	if (isSuccess) {
-	// 		toast.success('Mining started successfully');
-	// 	}
-	// }, [isError, isSuccess, error]);
+	useEffect(() => {
+		if (isError) {
+			toast.error(error?.data?.message);
+		}
+		if (isSuccess) {
+			toast.success('Mining started successfully');
+		}
+	}, [isError, isSuccess, error]);
 
 	// useEffect(() => {
 	// 	if (transferIsError) {
@@ -103,9 +100,9 @@ const FreeMing = () => {
 				</NavLink>
 			</div>
 		);
-	} else if (trxcMining?.profit < 10) {
+	} else if (mining?.mining_profit < 0.5) {
 		dialogTitle = 'You have to have minimum $10 mining profit to transfer!';
-	} else if (trxcMining?.profit >= 10 && user?.is_first_deposit) {
+	} else if (mining?.mining_profit >= 0.5) {
 		dialogTitle = 'are you sure to transfer your bonus?';
 		content = (
 			<div className='flex items-center justify-center space-x-2'>
@@ -136,27 +133,26 @@ const FreeMing = () => {
 						</div>
 					</div>
 					<div className=''>
-						{miningLoading ? (
+						{miningLoading && mining?.mining_profit !== 'undefined' ? (
 							<PropagateLoader color='#fff' />
 						) : (
-							<Countdown profit={trxcMining?.profit} />
+							<Countdown profit={mining?.mining_profit} />
 						)}
 					</div>
 				</div>
 			</div>
 			<div className='grid grid-cols-2 gap-4 text-[0.6rem] md:text-sm'>
-				{trxcMining ? (
+				{mining ? (
 					<button
 						className='px-3 py-2 font-bold text-center text-white bg-yellow-500 rounded-sm hover:bg-yellow-600 disabled:cursor-not-allowed'
-						onClick={handleClickOpen}
+						disabled
 					>
-						Transfer
+						Running
 					</button>
 				) : (
 					<button
 						className='px-3 py-2 font-bold text-center text-white bg-yellow-600 rounded-sm hover:bg-yellow-700 disabled:cursor-not-allowed'
-						onClick={handleStartTrxcMining}
-						disabled
+						onClick={handleStartMining}
 					>
 						{isLoading ? (
 							<ButtonLoader bgColor='bg-yellow-500' />

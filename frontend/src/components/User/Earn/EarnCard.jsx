@@ -1,5 +1,4 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 
 // import { useGetUsdxDetailsQuery } from '../../features/usdx/usdxApi';
 
@@ -19,12 +18,12 @@ const EarnCard = ({ user }) => {
 				</h1>
 			</div>
 			<div className='grid grid-cols-2 gap-4 text-[0.6rem] md:text-sm'>
-				<NavLink
-					to='/usdx-withdraw'
-					className='px-3 py-2 font-bold text-center text-gray-100 bg-yellow-600 rounded-sm'
+				<button
+					disabled
+					className='px-3 py-2 font-bold text-center cursor-not-allowed text-gray-100 bg-yellow-600 rounded-sm'
 				>
 					Transfer
-				</NavLink>
+				</button>
 				<button
 					className='px-3 py-2 font-bold text-center text-gray-100 bg-yellow-600 rounded-sm disabled:cursor-not-allowed '
 					disabled

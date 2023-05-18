@@ -5,13 +5,8 @@ export const miningApi = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
 		// get mining
 		getMining: builder.query({
-			query: () => '/mining/me',
+			query: () => '/my/mining',
 			providesTags: ['Mining'],
-
-			async onQueryStarted({ dispatch, queryFulfilled }) {
-				const result = await queryFulfilled;
-				dispatch(setMining(result.data));
-			},
 		}),
 
 		// create mining id
@@ -25,10 +20,9 @@ export const miningApi = apiSlice.injectEndpoints({
 
 		// start mining
 		startMining: builder.mutation({
-			query: (data) => ({
-				url: '/mining/start',
+			query: () => ({
+				url: '/start/mining',
 				method: 'POST',
-				body: data,
 			}),
 			invalidatesTags: ['Mining'],
 		}),
