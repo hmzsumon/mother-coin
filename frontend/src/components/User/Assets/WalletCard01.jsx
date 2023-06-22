@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 const WalletCard01 = ({ user }) => {
-	console.log(user);
+	// console.log(user);
 	return (
 		<div className='p-4 space-y-4 rounded-md bg-stone-900'>
 			<div className='flex items-center '>
@@ -36,7 +36,7 @@ const WalletCard01 = ({ user }) => {
 					state={{ coin: 'mother' }}
 					className='w-full px-3 py-2 font-bold text-center text-gray-100 bg-yellow-600 rounded-sm'
 				>
-					Send
+					Withdraw
 				</NavLink>
 
 				<NavLink
@@ -44,7 +44,7 @@ const WalletCard01 = ({ user }) => {
 					state={'mother-coin-address'}
 					className='w-full px-3 py-2 font-bold text-center text-gray-100 bg-yellow-600 rounded-sm'
 				>
-					Receive
+					Deposit
 				</NavLink>
 			</div>
 		</div>

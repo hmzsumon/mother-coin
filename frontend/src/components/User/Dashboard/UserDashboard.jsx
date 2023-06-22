@@ -32,8 +32,8 @@ const UserDashboard = () => {
 				<div className='space-y-3 '>
 					<Carousel />
 					{/* <UserInfo user={user} /> */}
-					<WalletCard01 user={user} />
-					<WalletCard02 user={user} />
+
+					{/* <WalletCard02 user={user} /> */}
 					<EarnCard user={user} />
 					<FreeMing />
 					{/* <Menu /> */}

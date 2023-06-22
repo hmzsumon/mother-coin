@@ -8,7 +8,7 @@ import { NavLink } from 'react-router-dom';
 const navItems = [
 	{ id: 1, name: 'Home', icon: <AiTwotoneHome />, link: '/dashboard' },
 	{ id: 3, name: 'Market', icon: <GiMining />, link: '/coming-soon' },
-	{ id: 2, name: 'Exchange', icon: <FcCurrencyExchange />, link: '/exchange' },
+	{ id: 2, name: 'Tread', icon: <FcCurrencyExchange />, link: '/exchange' },
 
 	// {
 	// 	id: 4,
@@ -16,7 +16,7 @@ const navItems = [
 	// 	icon: <VscHistory />,
 	// 	link: '/history',
 	// },
-	{ id: 6, name: 'C2C', icon: <GiWallet />, link: '/coming-soon' },
+	{ id: 6, name: 'Feature', icon: <GiWallet />, link: '/coming-soon' },
 	{ id: 5, name: 'Assets', icon: <GiWallet />, link: '/assets' },
 ];
 
@@ -29,7 +29,7 @@ const Navbar = () => {
 						to={item.link}
 						key={item.id}
 						className={({ isActive }) =>
-							isActive ? ' text-yellow-400' : 'text-gray-100'
+							isActive ? ' text-yellow-400' : 'text-gray-400'
 						}
 					>
 						<li className='flex flex-col items-center justify-center text-sm font-semibold list-none md:text-xl'>

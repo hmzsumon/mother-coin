@@ -11,6 +11,7 @@ import { useLogoutMutation } from '../../../features/auth/authApi';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useRef } from 'react';
+import Navbar from './Navbar';
 
 import Top from './Top';
 const darkTheme = createTheme({
@@ -104,7 +105,7 @@ const Layout = ({ children }) => {
 					<div className='w-full col-span-5 px-3 py-4 rounded-sm md:col-span-4 bg-stone-950'>
 						{children}
 					</div>
-					{/* <Navbar /> */}
+					<Navbar />
 				</div>
 			</div>
 		</ThemeProvider>

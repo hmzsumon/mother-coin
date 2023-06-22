@@ -62,6 +62,7 @@ import CreatePrice from './components/Admin/Price/CreatePrice';
 import SendMusd from './components/User/Send/SendMusd';
 import Security from './components/User/Security/Security';
 import EarnOffer from './components/User/Earn/EarnOffer';
+import Receive2 from './components/User/Receive/Receive2';
 
 const App = () => {
 	return (
@@ -135,6 +136,7 @@ const App = () => {
 					<Route path='/exchange' element={<Trade />} />
 					<Route path='/mining' element={<Mining />} />
 					<Route path='/receive' element={<Receive />} />
+					<Route path='/receive-wallet' element={<Receive2 />} />
 					<Route path='/profile' element={<Profile />} />
 					<Route path='/security' element={<Security />} />
 					<Route path='/earn-offer' element={<EarnOffer />} />
